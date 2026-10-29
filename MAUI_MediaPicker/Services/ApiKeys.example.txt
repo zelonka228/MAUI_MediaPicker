@@ -1,0 +1,15 @@
+Скопіюйте цей файл у ApiKeys.cs в папці Services і вставте свої ключі.
+Файл ApiKeys.cs не повинен потрапляти в git.
+
+namespace MAUI_MediaPicker.Services;
+
+internal static class ApiKeys
+{
+    public const string AiKey = "ВАШ_КЛЮЧ_OPENROUTER";
+    public const string AiBaseUrl = "https://openrouter.ai/api/v1";
+    public const string AiModel = "openrouter/free";
+
+    public const string SttKey = "ВАШ_КЛЮЧ_GROQ";
+    public const string SttBaseUrl = "https://api.groq.com/openai/v1";
+    public const string SttModel = "whisper-large-v3-turbo";
+}

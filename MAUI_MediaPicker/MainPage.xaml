@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MAUI_MediaPicker"
+             x:Class="MAUI_MediaPicker.MainPage"
+             Title="Диктофон">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="14">
+
+            <Label
+                x:Name="TimerLabel"
+                Text="00:00"
+                FontSize="48"
+                HorizontalOptions="Center" />
+
+            <Button
+                x:Name="RecordButton"
+                Text="Почати запис"
+                Clicked="OnRecordClicked" />
+
+            <Label
+                x:Name="StatusLabel"
+                FontSize="13"
+                TextColor="Gray"
+                HorizontalOptions="Center" />
+
+            <BoxView HeightRequest="1" Color="LightGray" />
+
+            <Label Text="Записи" FontAttributes="Bold" FontSize="18" />
+
+            <Label
+                x:Name="EmptyLabel"
+                Text="Записів поки немає"
+                TextColor="Gray" />
+
+            <CollectionView
+                x:Name="RecordingsView"
+                SelectionMode="Single"
+                MaximumHeightRequest="260"
+                SelectionChanged="OnSelectionChanged">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="local:RecordingItem">
+                        <Grid ColumnDefinitions="*,Auto,Auto" Padding="6" ColumnSpacing="6">
+                            <VerticalStackLayout VerticalOptions="Center">
+                                <Label Text="{Binding Name}" FontAttributes="Bold" />
+                                <Label Text="{Binding Details}" FontSize="12" TextColor="Gray" />
+                            </VerticalStackLayout>
+                            <Button Grid.Column="1" Text="▶" Clicked="OnPlayClicked" />
+                            <Button Grid.Column="2" Text="🗑" Clicked="OnDeleteClicked" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <BoxView HeightRequest="1" Color="LightGray" />
+
+            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                <Label Text="Мова розповіді:" VerticalOptions="Center" />
+                <Picker
+                    x:Name="LanguagePicker"
+                    Grid.Column="1"
+                    SelectedIndex="0">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Українська</x:String>
+                            <x:String>Російська</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+            </Grid>
+
+            <Button
+                x:Name="SummarizeButton"
+                Text="Розпізнати та зробити тези"
+                IsEnabled="False"
+                Clicked="OnSummarizeClicked" />
+
+            <ActivityIndicator x:Name="Spinner" IsRunning="False" />
+
+            <Label Text="Текст розповіді" FontAttributes="Bold" FontSize="18" />
+            <Label x:Name="TranscriptLabel" LineBreakMode="WordWrap" />
+
+            <Label Text="Тези" FontAttributes="Bold" FontSize="18" />
+            <Label x:Name="SummaryLabel" LineBreakMode="WordWrap" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
